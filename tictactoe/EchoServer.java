@@ -86,48 +86,48 @@ public class EchoServer extends AbstractServer {
             this.sendToAllClients(client.getInfo("ID") + ": " + msg);
             client.setInfo("numMess", 1);
             switch (msg.toString()) {
-            case "#1":
-                serverUI.receiveCommand("#1");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#2":
-                serverUI.receiveCommand("#2");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#3":
-                serverUI.receiveCommand("#3");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#4":
-                serverUI.receiveCommand("#4");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#5":
-               serverUI.receiveCommand("#5");
-               serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#6":
-                serverUI.receiveCommand("#6");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#7":
-                serverUI.receiveCommand("#7");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#8":
-                serverUI.receiveCommand("#8");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#9":
-                serverUI.receiveCommand("#9");
-                serverUI.receiveCommand("#serverTurn");
-                break;
-            case "#clientFirst":
-                serverUI.receiveCommand("#clientFirst");
-                break;
-            default:
-                break;
-        }
+                case "#1":
+                    serverUI.receiveCommand("#1");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#2":
+                    serverUI.receiveCommand("#2");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#3":
+                    serverUI.receiveCommand("#3");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#4":
+                    serverUI.receiveCommand("#4");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#5":
+                    serverUI.receiveCommand("#5");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#6":
+                    serverUI.receiveCommand("#6");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#7":
+                    serverUI.receiveCommand("#7");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#8":
+                    serverUI.receiveCommand("#8");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#9":
+                    serverUI.receiveCommand("#9");
+                    serverUI.receiveCommand("#serverTurn");
+                    break;
+                case "#clientFirst":
+                    serverUI.receiveCommand("#clientFirst");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -181,6 +181,8 @@ public class EchoServer extends AbstractServer {
         Thread t = new Thread(new Runnable() {
             public void run() {
                 serverUI.receiveCommand("enableAll");
+                serverUI.receiveCommand("#enableRestart");
+                serverUI.receiveCommand("#connected");
             }
         }, "EnableButton");
         t.start();
