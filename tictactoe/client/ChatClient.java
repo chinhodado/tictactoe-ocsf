@@ -24,7 +24,7 @@ public class ChatClient extends AbstractClient {
      * The interface type variable. It allows the implementation of the display method in the client.
      */
     ChatIF clientUI;
-    String id;//login id, added for E51
+    String id;
 
     //Constructors ****************************************************
     /**
@@ -59,6 +59,7 @@ public class ChatClient extends AbstractClient {
      *
      * @param msg The message from the server.
      */
+    @Override
     public void handleMessageFromServer(Object msg) {
         switch (msg.toString()) {
             case "#1":
@@ -98,7 +99,7 @@ public class ChatClient extends AbstractClient {
                 clientUI.receiveCommand("#clientTurn");
                 break;
             case "#serverWon":
-                clientUI.receiveCommand("disableAll");    
+                clientUI.receiveCommand("disableAll");
                 clientUI.receiveCommand("#serverWon");
                 break;
             case "#clientWon":
@@ -109,6 +110,8 @@ public class ChatClient extends AbstractClient {
                 clientUI.receiveCommand("disableAll");
                 clientUI.receiveCommand("#draw");
                 break;
+            case "#restart":
+                clientUI.receiveCommand("#restart");
             default:
                 break;
         }
@@ -124,7 +127,7 @@ public class ChatClient extends AbstractClient {
         char temp = message.charAt(0);
         if (temp == '#') {
             try {
-                handleCommand(message);//added for E50
+                handleCommand(message);
             } catch (IOException ex) {
                 Logger.getLogger(ChatClient.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -138,14 +141,13 @@ public class ChatClient extends AbstractClient {
         }
     }
 
-    public void handleCommand(String command) throws IOException {//added for E50
+    public void handleCommand(String command) throws IOException {
         if (command.equals("#quit")) {
             quit();
         } else if (command.equals("#logoff")) {
             try {
                 closeConnection();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
+            } catch (IOException e) {                
                 e.printStackTrace();
             }
         } else if (command.contains("#sethost")) {
@@ -171,7 +173,6 @@ public class ChatClient extends AbstractClient {
                     sendToServer(command);
                     System.out.println("Connected to server!");
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             } else {
@@ -215,11 +216,13 @@ public class ChatClient extends AbstractClient {
         System.exit(0);
     }
 
-    protected void connectionClosed() { //added for E49a
+    @Override
+    protected void connectionClosed() { 
         System.out.println("Connection closed");
     }
 
-    protected void connectionException(Exception exception) { //added for E49a
+    @Override
+    protected void connectionException(Exception exception) { 
         connectionClosed();
         System.out.println("Server has shutted down.");
         System.out.println("Terminating client...");
