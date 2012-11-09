@@ -42,7 +42,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
 
         jTextField1 = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
+        connectButton = new javax.swing.JButton();
         hostTextField = new javax.swing.JTextField();
         portTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -72,10 +72,10 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Client");
 
-        jButton1.setText("Start client");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        connectButton.setText("Start client");
+        connectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                connectButtonActionPerformed(evt);
             }
         });
 
@@ -200,56 +200,59 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(connectButton)
+                .addContainerGap(100, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(radioButtonFirst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioButtonSecond)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radioButtonFirst)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioButtonSecond)
+                                .addGap(0, 103, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(hostTextField)
-                                    .addComponent(portTextField)
-                                    .addComponent(IDTextField)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(button9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(56, 56, 56))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(hostTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                    .addComponent(portTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                    .addComponent(IDTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                                .addGap(56, 56, 56))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(hostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,21 +276,20 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(button5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(button8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(button9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(statusLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(statusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
+                .addComponent(connectButton)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -297,8 +299,9 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
         Thread t = new Thread(new Runnable() {
+
             public void run() {
                 String host = "";
                 int port = 0;  //The port number
@@ -328,7 +331,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
         });
         t.start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_connectButtonActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         if (isClientTurn) {
@@ -467,6 +470,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 gameCli = new GameClientGUI();
                 gameCli.setVisible(true);
@@ -487,11 +491,11 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
     private javax.swing.JButton button8;
     private javax.swing.JButton button9;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton connectButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JTextField hostTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -528,6 +532,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
         switch (command) {
             case "enableAll": {
                 Runnable enable = new Runnable() {
+
                     public void run() {
                         button1.setEnabled(true);
                         button2.setEnabled(true);
@@ -545,6 +550,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "disableAll": {
                 Runnable enable = new Runnable() {
+
                     public void run() {
                         button1.setEnabled(false);
                         button2.setEnabled(false);
@@ -562,6 +568,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#1": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button1.setText("X");
                         button1.setEnabled(false);
@@ -572,6 +579,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#2": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button2.setText("X");
                         button2.setEnabled(false);
@@ -582,6 +590,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#3": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button3.setText("X");
                         button3.setEnabled(false);
@@ -592,6 +601,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#4": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button4.setText("X");
                         button4.setEnabled(false);
@@ -602,6 +612,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#5": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button5.setText("X");
                         button5.setEnabled(false);
@@ -612,6 +623,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#6": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button6.setText("X");
                         button6.setEnabled(false);
@@ -622,6 +634,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#7": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button7.setText("X");
                         button7.setEnabled(false);
@@ -632,6 +645,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#8": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button8.setText("X");
                         button8.setEnabled(false);
@@ -642,6 +656,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#9": {
                 Runnable disable = new Runnable() {
+
                     public void run() {
                         button9.setText("X");
                         button9.setEnabled(false);
@@ -652,6 +667,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#serverWon": {
                 Runnable temp = new Runnable() {
+
                     public void run() {
                         statusLabel.setText("You lost...");
                     }
@@ -661,6 +677,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#clientWon": {
                 Runnable temp = new Runnable() {
+
                     public void run() {
                         statusLabel.setText("You won!");
                     }
@@ -670,6 +687,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#draw": {
                 Runnable temp = new Runnable() {
+
                     public void run() {
                         statusLabel.setText("Draw game!");
                     }
@@ -679,6 +697,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#clientTurn": {
                 Runnable temp = new Runnable() {
+
                     public void run() {
                         statusLabel.setText("Your turn!");
                         isClientTurn = true;
@@ -689,7 +708,8 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
             }
             case "#restart":
                 receiveCommand("enableAll");
-                Runnable temp = new Runnable() {
+                Runnable temp2 = new Runnable() {
+
                     public void run() {
                         button1.setText("");
                         button2.setText("");
@@ -702,8 +722,17 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
                         button9.setText("");
                     }
                 };
-                java.awt.EventQueue.invokeLater(temp);
+                java.awt.EventQueue.invokeLater(temp2);
                 break;
+            case "#connected": {
+                Runnable temp3 = new Runnable() {
+                    public void run() {
+                        connectButton.setEnabled(false);                        
+                    }
+                };
+                java.awt.EventQueue.invokeLater(temp3);
+                break;
+            }
         }
 
     }

@@ -231,9 +231,10 @@ public class ChatClient extends AbstractClient {
 
     @Override
     protected void connectionEstablished() {
-        Thread t = new Thread(new Runnable() {
+    Thread t = new Thread(new Runnable() {
             public void run() {
                 clientUI.receiveCommand("enableAll");
+                clientUI.receiveCommand("#connected");
             }
         }, "EnableButton");
         t.start();
