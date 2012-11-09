@@ -1,9 +1,9 @@
 
 import java.io.*;
-import client.*;
+//import client.*;
 import common.*;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+//import javax.swing.SwingUtilities;
 
 /**
  * @author Trung Do
@@ -13,6 +13,7 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
     EchoServer server;
     static GameServer gameServ;
     static int count = 0;
+    public boolean clientFirst = false;
 
     /**
      * Creates new form GameServer
@@ -60,8 +61,6 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
                 serverStartActionPerformed(evt);
             }
         });
-
-        statusLabel.setText("nothing yet");
 
         portTextField.setText("5555");
 
@@ -227,7 +226,7 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
                     .addComponent(button9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(statusLabel)
                 .addGap(18, 18, 18)
                 .addComponent(serverStart)
@@ -261,75 +260,102 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
     }//GEN-LAST:event_serverStartActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        if (isServerTurn()){
         button1.setText("X");
         button1.setEnabled(false);
         server.handleMessageFromServerUI("#1");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        if (isServerTurn()){
         button2.setText("X");
         button2.setEnabled(false);
         server.handleMessageFromServerUI("#2");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        if (isServerTurn()){
         button3.setText("X");
         button3.setEnabled(false);
         server.handleMessageFromServerUI("#3");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button3ActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        if (isServerTurn()){
         button4.setText("X");
         button4.setEnabled(false);
         server.handleMessageFromServerUI("#4");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        if (isServerTurn()){
         button5.setText("X");
         button5.setEnabled(false);
         server.handleMessageFromServerUI("#5");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button5ActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
+        if (isServerTurn()){
         button6.setText("X");
         button6.setEnabled(false);
         server.handleMessageFromServerUI("#6");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button6ActionPerformed
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+        if (isServerTurn()){
         button7.setText("X");
         button7.setEnabled(false);
         server.handleMessageFromServerUI("#7");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button7ActionPerformed
 
     private void button8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button8ActionPerformed
+        if (isServerTurn()){
         button8.setText("X");
         button8.setEnabled(false);
         server.handleMessageFromServerUI("#8");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button8ActionPerformed
 
     private void button9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button9ActionPerformed
+        if (isServerTurn()){
         button9.setText("X");
         button9.setEnabled(false);
         server.handleMessageFromServerUI("#9");
         count++;
+        statusLabel.setText("Client's turn");
         checkWinner();
+        } else JOptionPane.showMessageDialog(null, "Not your turn!");
     }//GEN-LAST:event_button9ActionPerformed
 
     /**
@@ -537,6 +563,15 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
                 }
             };
             java.awt.EventQueue.invokeLater(disable);
+        } else if (command.equals("#clientFirst")) {
+            clientFirst = true;
+        } else if (command.equals("#serverTurn")) {
+            Runnable temp = new Runnable() {
+                public void run() {
+                    statusLabel.setText("Your turn!"); 
+                }
+            };
+            java.awt.EventQueue.invokeLater(temp);
         }
     }
 
@@ -567,7 +602,7 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
         }
         if (win.equals("X")) {
             receiveCommand("disableAll");
-            server.sendToAllClients("serverWon");
+            server.sendToAllClients("#serverWon");
             Runnable temp = new Runnable() {
                 public void run() {
                     statusLabel.setText("You won!");
@@ -575,10 +610,9 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
             };
             java.awt.EventQueue.invokeLater(temp);
             //JOptionPane.showMessageDialog(null, "Server won!");   
-        }
-        else if (win.equals("O")) {
+        } else if (win.equals("O")) {
             receiveCommand("disableAll");
-            server.sendToAllClients("clientWon");
+            server.sendToAllClients("#clientWon");
             Runnable temp = new Runnable() {
                 public void run() {
                     statusLabel.setText("You lost...");
@@ -586,11 +620,21 @@ public class GameServer extends javax.swing.JFrame implements ChatIF {
             };
             java.awt.EventQueue.invokeLater(temp);
             //JOptionPane.showMessageDialog(null, "Client won!");
+        } else if (count == 9 && win.equals("")) {
+            server.sendToAllClients("#draw");
+            Runnable temp = new Runnable() {
+                public void run() {
+                    statusLabel.setText("Draw game!");
+                }
+            };
+            java.awt.EventQueue.invokeLater(temp);
         }
-        else if (count == 9 && win.equals("")) {
-
-            JOptionPane.showMessageDialog(null, "Tie Game!");
-
-        }
+    }
+    
+    private boolean isServerTurn()
+    {
+        boolean isServerTurn=true;
+        if ((clientFirst&&(count%2==0))||((!clientFirst)&&(count%2==1))) isServerTurn=false;
+        return isServerTurn;
     }
 }

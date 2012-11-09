@@ -63,38 +63,51 @@ public class ChatClient extends AbstractClient {
         switch (msg.toString()) {
             case "#1":
                 clientUI.receiveCommand("#1");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#2":
                 clientUI.receiveCommand("#2");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#3":
                 clientUI.receiveCommand("#3");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#4":
                 clientUI.receiveCommand("#4");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#5":
                 clientUI.receiveCommand("#5");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#6":
                 clientUI.receiveCommand("#6");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#7":
                 clientUI.receiveCommand("#7");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#8":
                 clientUI.receiveCommand("#8");
+                clientUI.receiveCommand("#clientTurn");
                 break;
             case "#9":
                 clientUI.receiveCommand("#9");
+                clientUI.receiveCommand("#clientTurn");
                 break;
-            case "serverWon":
+            case "#serverWon":
                 clientUI.receiveCommand("disableAll");    
                 clientUI.receiveCommand("#serverWon");
                 break;
-            case "clientWon":
+            case "#clientWon":
                 clientUI.receiveCommand("disableAll");
                 clientUI.receiveCommand("#clientWon");
+                break;
+            case "#draw":
+                clientUI.receiveCommand("disableAll");
+                clientUI.receiveCommand("#draw");
                 break;
             default:
                 break;
