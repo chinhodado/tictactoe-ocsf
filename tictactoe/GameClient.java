@@ -1,7 +1,6 @@
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
-//package client;
 
 import ocsf.client.*;
 import common.*;
@@ -28,13 +27,13 @@ public class GameClient extends AbstractClient {
 
     //Constructors ****************************************************
     /**
-     * Constructs an instance of the chat client.
+     * Constructs an instance of the game client.
      *
      * @param host The server to connect to.
      * @param port The port number to connect on.
      * @param clientUI The interface type variable.
      */
-    public GameClient(String ID, String host, int port, GameIF clientUI) //changed for E51
+    public GameClient(String ID, String host, int port, GameIF clientUI)
             throws IOException {
         super(host, port); //Call the superclass constructor
         this.id = ID;

@@ -3,10 +3,7 @@
 // license found at www.lloseng.com 
 
 import java.io.*;
-import java.util.Hashtable;
-
 import common.GameIF;
-
 import ocsf.server.*;
 
 /**
@@ -40,8 +37,7 @@ public class GameServer extends AbstractServer {
         super(port);
 
         this.serverUI = serverUI;
-        try {
-            //serverUI.receiveCommand("connected");
+        try {           
             listen(); //Start listening for connections
         } catch (Exception ex) {
             System.out.println("ERROR - Could not listen for clients!");
@@ -55,7 +51,7 @@ public class GameServer extends AbstractServer {
      * @param msg The message received from the client.
      * @param client The connection from which the message originated.
      */
-    public void handleMessageFromClient(Object msg, ConnectionToClient client)//changed for E51
+    public void handleMessageFromClient(Object msg, ConnectionToClient client)
     {
         if (client.getInfo("numMess").equals(0)) {
             if (!((String) msg).contains("#login")) {
@@ -78,9 +74,7 @@ public class GameServer extends AbstractServer {
                     e.printStackTrace();
                 }
 
-            }
-            //Note: E51c/iv is not necessary, since the server cannot receive the #login command at any other time
-            //than when a client connect, since this is already dealt with in ChatClient. 
+            }           
         } else {
             System.out.println("Message received: " + msg + " from " + client + " (" + client.getInfo("ID") + ")");
             this.sendToAllClients(client.getInfo("ID") + ": " + msg);
@@ -134,7 +128,7 @@ public class GameServer extends AbstractServer {
     /**
      * This method overrides the one in the superclass. Called when the server starts listening for connections.
      */
-    protected void serverStarted()//changed for E50c
+    protected void serverStarted()
     {
         System.out.println("Server listening for connections on port " + getPort());
         stopped = false;
@@ -144,36 +138,13 @@ public class GameServer extends AbstractServer {
     /**
      * This method overrides the one in the superclass. Called when the server stops listening for connections.
      */
-    protected void serverStopped()//changed for E50c
+    protected void serverStopped()
     {
         System.out.println("Server has stopped listening for connections.");
         stopped = true;
     }
 
     //Class methods ***************************************************
-    /**
-     * This method is responsible for the creation of the server instance (there is no UI in this phase).
-     *
-     * @param args[0] The port number to listen on. Defaults to 5555 if no argument is entered.
-     */
-    //removed for E50b
-    public static void main(String[] args) {
-        int port = 0; //Port to listen on
-
-        try {
-            port = Integer.parseInt(args[0]); //Get port from command line
-        } catch (Throwable t) {
-            port = DEFAULT_PORT; //Set port to 5555
-        }
-
-        GameServer sv = new GameServer(port, null);
-
-        try {
-            sv.listen(); //Start listening for connections
-        } catch (Exception ex) {
-            System.out.println("ERROR - Could not listen for clients!");
-        }
-    }
 
     protected void clientConnected(ConnectionToClient client) {//added for E49c
         System.out.println("Client " + client + " connected!");
@@ -277,9 +248,8 @@ public class GameServer extends AbstractServer {
 
     }
 
-    protected void serverClosed() //added for E50c
+    protected void serverClosed()
     {
         closed = true;
     }
 }
-//End of GameServer class

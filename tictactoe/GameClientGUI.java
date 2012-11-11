@@ -1,12 +1,9 @@
 
 import java.io.*;
-//import client.*;
 import common.*;
 import javax.swing.JOptionPane;
 
-/**
- * @author Trung Do
- */
+
 public class GameClientGUI extends javax.swing.JFrame implements GameIF {
 
     final public static int DEFAULT_PORT = 5555;
@@ -14,7 +11,7 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
     static GameClientGUI gameCli;
     private boolean isClientTurn = false;
 
-    // Creates new form GameClient
+    // Creates new form GameClientGUI
     public GameClientGUI() {
         initComponents();
     }
@@ -307,7 +304,7 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
                 int port = 0;  //The port number
                 String ID = "";
 
-                try//added for E51a
+                try
                 {
                     ID = IDTextField.getText();
                 } catch (Exception e) {
@@ -319,7 +316,7 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
                 } catch (Exception e) {
                     host = "localhost";
                 }
-                //added for E49b
+                
                 try {
                     port = Integer.parseInt(portTextField.getText());
                 } catch (Exception e) {
@@ -473,8 +470,7 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
 
             public void run() {
                 gameCli = new GameClientGUI();
-                gameCli.setVisible(true);
-                //new GameClient().setVisible(true);
+                gameCli.setVisible(true);                
             }
         });
     }

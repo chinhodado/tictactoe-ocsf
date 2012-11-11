@@ -3,9 +3,6 @@ import java.io.*;
 import common.*;
 import javax.swing.JOptionPane;
 
-/**
- * @author Trung Do
- */
 public class GameServerGUI extends javax.swing.JFrame implements GameIF {
 
     GameServer server;
@@ -491,8 +488,6 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
                             button7.setEnabled(true);
                             button8.setEnabled(true);
                             button9.setEnabled(true);
-                            //button1.revalidate();
-                            //button1.repaint();
                         }
                     };
                     java.awt.EventQueue.invokeLater(enable);
