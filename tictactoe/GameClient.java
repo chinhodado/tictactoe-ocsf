@@ -1,7 +1,7 @@
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
-package client;
+//package client;
 
 import ocsf.client.*;
 import common.*;
@@ -17,13 +17,13 @@ import java.util.logging.Logger;
  * @author Fran&ccedil;ois B&eacute;langer
  * @version July 2000
  */
-public class ChatClient extends AbstractClient {
+public class GameClient extends AbstractClient {
     //Instance variables **********************************************
 
     /**
      * The interface type variable. It allows the implementation of the display method in the client.
      */
-    ChatIF clientUI;
+    GameIF clientUI;
     String id;
 
     //Constructors ****************************************************
@@ -34,7 +34,7 @@ public class ChatClient extends AbstractClient {
      * @param port The port number to connect on.
      * @param clientUI The interface type variable.
      */
-    public ChatClient(String ID, String host, int port, ChatIF clientUI) //changed for E51
+    public GameClient(String ID, String host, int port, GameIF clientUI) //changed for E51
             throws IOException {
         super(host, port); //Call the superclass constructor
         this.id = ID;
@@ -129,7 +129,7 @@ public class ChatClient extends AbstractClient {
             try {
                 handleCommand(message);
             } catch (IOException ex) {
-                Logger.getLogger(ChatClient.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {

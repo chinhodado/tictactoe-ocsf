@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 /**
  * @author Trung Do
  */
-public class GameServerGUI extends javax.swing.JFrame implements ChatIF {
+public class GameServerGUI extends javax.swing.JFrame implements GameIF {
 
-    EchoServer server;
+    GameServer server;
     static GameServerGUI gameServ;
     static int count = 0;
     public boolean clientFirst = false;
@@ -266,7 +266,7 @@ public class GameServerGUI extends javax.swing.JFrame implements ChatIF {
                 } catch (Throwable t) {
                     port = 5555; //Set port to 5555
                 }
-                server = new EchoServer(port, gameServ);
+                server = new GameServer(port, gameServ);
                 //GameServer chat = new GameServer(port);
                 //chat.accept();  //Wait for console data
             }

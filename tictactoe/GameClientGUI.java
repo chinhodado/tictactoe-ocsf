@@ -1,16 +1,16 @@
 
 import java.io.*;
-import client.*;
+//import client.*;
 import common.*;
 import javax.swing.JOptionPane;
 
 /**
  * @author Trung Do
  */
-public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
+public class GameClientGUI extends javax.swing.JFrame implements GameIF {
 
     final public static int DEFAULT_PORT = 5555;
-    ChatClient client;
+    GameClient client;
     static GameClientGUI gameCli;
     private boolean isClientTurn = false;
 
@@ -21,7 +21,7 @@ public class GameClientGUI extends javax.swing.JFrame implements ChatIF {
 
     public void startClient(String ID, String host, int port) {
         try {
-            client = new ChatClient(ID, host, port, this);
+            client = new GameClient(ID, host, port, this);
             if (radioButtonFirst.isSelected()) {
                 client.sendToServer("#clientFirst");
                 receiveCommand("#clientTurn");

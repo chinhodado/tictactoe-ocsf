@@ -5,7 +5,7 @@
 import java.io.*;
 import java.util.Hashtable;
 
-import common.ChatIF;
+import common.GameIF;
 
 import ocsf.server.*;
 
@@ -18,14 +18,14 @@ import ocsf.server.*;
  * @author Paul Holden
  * @version July 2000
  */
-public class EchoServer extends AbstractServer {
+public class GameServer extends AbstractServer {
     //Class variables *************************************************
 
     /**
      * The default port to listen on.
      */
     final public static int DEFAULT_PORT = 5555;
-    ChatIF serverUI;//the server console
+    GameIF serverUI;//the server console
     boolean closed = false;//sever closed?
     boolean stopped = false;//server stopped?
 
@@ -35,7 +35,7 @@ public class EchoServer extends AbstractServer {
      *
      * @param port The port number to connect on.
      */
-    public EchoServer(int port, ChatIF serverUI) //changed for E50b
+    public GameServer(int port, GameIF serverUI) //changed for E50b
     {
         super(port);
 
@@ -166,7 +166,7 @@ public class EchoServer extends AbstractServer {
             port = DEFAULT_PORT; //Set port to 5555
         }
 
-        EchoServer sv = new EchoServer(port, null);
+        GameServer sv = new GameServer(port, null);
 
         try {
             sv.listen(); //Start listening for connections
@@ -282,4 +282,4 @@ public class EchoServer extends AbstractServer {
         closed = true;
     }
 }
-//End of EchoServer class
+//End of GameServer class
