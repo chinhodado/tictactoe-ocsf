@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import ocsf.server.ConnectionToClient;
 
 
 public class Game {
@@ -6,7 +7,7 @@ public class Game {
 	public enum Move {X, O;}
 	
 	private String name;
-	private Player playerX, playerO;
+	public ConnectionToClient playerX, playerO;
 	private final Move [][]grid;
 	private ArrayList<Player> lurkers; 
 	private Status status;
@@ -21,33 +22,33 @@ public class Game {
 		grid = new Move [3][3];
 	}
 	
-	public Game (String name, Player playerX, Player playerO){
-		this.name = name;
-		this.playerX = playerX;
-		this.playerO = playerO;
-		currentMove = Move.X;
-		status = Status.ONGOING;
-		grid = new Move [3][3];
-	}
+//	public Game (String name, Player playerX, Player playerO){
+//		this.name = name;
+//		this.playerX = playerX;
+//		this.playerO = playerO;
+//		currentMove = Move.X;
+//		status = Status.ONGOING;
+//		grid = new Move [3][3];
+//	}
 	
-	public boolean addPlayerX(Player player){
+	public boolean addPlayerX(ConnectionToClient player){
 		if (playerX == null){
 			playerX = player;
-			return true;
-		}else if (! playerX.isConnected()){
-			playerX.connect();
-			return true;
-		}
-		return false;
+			return true;}
+//		}else if (! playerX.isConnected()){
+//			playerX.connect();
+//			return true;
+//		}
+                        else return false;
 	}
 	
-	public boolean addPlayerO(Player player){
+	public boolean addPlayerO(ConnectionToClient player){
 		if (playerO == null){
-			playerO = player;
-			return true;
-		}else if (! playerO.isConnected()){
-			playerO.connect();
-			return true;
+//			playerO = player;
+//			return true;
+//		}else if (! playerO.isConnected()){
+//			playerO.connect();
+//			return true;
 		}
 		return false;
 	}
