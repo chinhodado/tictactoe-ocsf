@@ -24,10 +24,6 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
     public void startClient(String ID, String host, int port) {
         try {
             client = new GameClient(ID, host, port, this);
-//            if (radioButtonFirst.isSelected()) {
-//                client.sendToServer("#clientFirst");
-//                receiveCommand("#clientTurn");
-//            } //else client.sendToServer("#clientSecond");
         } catch (IOException exception) {
             System.out.println("Error: Can't setup connection!"
                     + " Awaiting command");
@@ -709,98 +705,6 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
                     java.awt.EventQueue.invokeLater(enable);
                     break;
                 }
-                case "#1": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            //if (isClientTurn) toogleXO();
-                            button1.setText(XO);
-                            button1.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#2": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-
-                            button2.setText(XO);
-                            button2.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#3": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button3.setText(XO);
-                            button3.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#4": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button4.setText(XO);
-                            button4.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#5": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button5.setText(XO);
-                            button5.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#6": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button6.setText(XO);
-                            button6.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#7": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button7.setText(XO);
-                            button7.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#8": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button8.setText(XO);
-                            button8.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
-                case "#9": {
-                    Runnable disable = new Runnable() {
-                        public void run() {
-                            button9.setText(XO);
-                            button9.setEnabled(false);
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(disable);
-                    break;
-                }
                 case "#XX1": {
                     Runnable disable = new Runnable() {
                         public void run() {
@@ -986,7 +890,7 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
                     isClientTurn = false;
                     break;
                 }
-                case "#serverWon": {
+                case "#clientLost": {
                     Runnable temp = new Runnable() {
                         public void run() {
                             statusLabel.setText("You lost...");
@@ -1018,33 +922,6 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
                     isClientTurn = true;
                     break;
                 }
-//                case "#clientTurn": {
-//                    Runnable temp = new Runnable() {
-//                        public void run() {
-//                            statusLabel.setText("Your turn!");
-//                            isClientTurn = true;
-//                        }
-//                    };
-//                    java.awt.EventQueue.invokeLater(temp);
-//                    break;
-//                }
-                case "#restart":
-                    receiveCommand("enableAll");
-                    Runnable temp2 = new Runnable() {
-                        public void run() {
-                            button1.setText("");
-                            button2.setText("");
-                            button3.setText("");
-                            button4.setText("");
-                            button5.setText("");
-                            button6.setText("");
-                            button7.setText("");
-                            button8.setText("");
-                            button9.setText("");
-                        }
-                    };
-                    java.awt.EventQueue.invokeLater(temp2);
-                    break;
                 case "#connected": {
                     Runnable temp3 = new Runnable() {
                         public void run() {
@@ -1063,18 +940,5 @@ public class GameClientGUI extends javax.swing.JFrame implements GameIF {
     @Override
     public void addGame(int gameName, ConnectionToClient client) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void receiveList(DefaultListModel listModel) {
-        this.listModel = listModel;
-    }
-
-    private void toogleXO() {
-        if (XO.equals("X")) {
-            XO = "O";
-        } else if (XO.equals("O")) {
-            XO = "X";
-        }
     }
 }

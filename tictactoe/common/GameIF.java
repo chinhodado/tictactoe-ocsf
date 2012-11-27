@@ -1,6 +1,5 @@
 package common;
 
-import javax.swing.DefaultListModel;
 import ocsf.server.ConnectionToClient;
 
 /**
@@ -9,14 +8,9 @@ import ocsf.server.ConnectionToClient;
  *
  */
 public interface GameIF {
-    //display message  
-
+    //display message
     public abstract void display(String message);
     //receive command
-
     public abstract void receiveCommand(String command);
-
     public abstract void addGame(int gameName, ConnectionToClient client);
-
-    public abstract void receiveList(DefaultListModel listModel);
 }

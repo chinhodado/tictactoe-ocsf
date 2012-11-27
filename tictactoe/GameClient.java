@@ -5,7 +5,6 @@
 import ocsf.client.*;
 import common.*;
 import java.io.*;
-import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,7 +106,7 @@ public class GameClient extends AbstractClient {
                     clientUI.receiveCommand("#OO1");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                
+
                 case "#OO2":
                     clientUI.receiveCommand("#OO2");
                     clientUI.receiveCommand("#clientTurn");
@@ -140,9 +139,9 @@ public class GameClient extends AbstractClient {
                     clientUI.receiveCommand("#OO9");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#serverWon":
+                case "#clientLost":
                     clientUI.receiveCommand("disableAll");
-                    clientUI.receiveCommand("#serverWon");
+                    clientUI.receiveCommand("#clientLost");
                     break;
                 case "#clientWon":
                     clientUI.receiveCommand("disableAll");
@@ -195,7 +194,6 @@ public class GameClient extends AbstractClient {
             try {
                 closeConnection();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         } else if (command.contains("#sethost")) {
             if (!isConnected()) {
@@ -220,7 +218,6 @@ public class GameClient extends AbstractClient {
                     sendToServer(command);
                     System.out.println("Connected to server!");
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             } else {
                 System.out.println("Already connected!");
@@ -283,8 +280,8 @@ public class GameClient extends AbstractClient {
     @Override
     protected void connectionEstablished() {
         Thread t = new Thread(new Runnable() {
+            @Override
             public void run() {
-                //clientUI.receiveCommand("enableAll");
                 clientUI.receiveCommand("#connected");
             }
         }, "EnableButton");

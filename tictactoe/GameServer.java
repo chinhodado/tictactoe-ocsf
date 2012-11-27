@@ -35,38 +35,13 @@ public class GameServer extends AbstractServer {
     static int gameName = 100;
     String a = "#XX";
 
-    public enum Status {
-
-        ONGOING, TIE, PLAYER1_WIN, PLAYER2_WIN;
-    }
-    //game class
-
-//    public static class Game {
-//
-//        String name;
-//        ConnectionToClient playerX;
-//        ConnectionToClient playerO;
-//
-//        public Game(int name) {
-//            this.name = name + "";
-//        }
-//
-//        public void addPlayer(ConnectionToClient player) {
-//            if (playerX == null) {
-//                playerX = player;
-//            } else if (playerO == null) {
-//                playerO = player;
-//            }
-//        }
-//    }
     //Constructors ****************************************************
     /**
      * Constructs an instance of the echo server.
      *
      * @param port The port number to connect on.
      */
-    public GameServer(int port, GameIF serverUI) //changed for E50b
-    {
+    public GameServer(int port, GameIF serverUI) {
         super(port);
         this.serverUI = serverUI;
         try {
@@ -115,6 +90,7 @@ public class GameServer extends AbstractServer {
                         game.addPlayerO(client);
                         final Game game2 = game;
                         Thread t = new Thread(new Runnable() {
+                            @Override
                             public void run() {
                                 startGame(game2);
                             }
@@ -133,17 +109,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"1");
-                                playerB.sendToClient(a+"1");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "1");
+                                playerB.sendToClient(a + "1");
                                 currentGame.setCell(0, 0);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -152,7 +127,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#2": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -163,17 +137,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"2");
-                                playerB.sendToClient(a+"2");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "2");
+                                playerB.sendToClient(a + "2");
                                 currentGame.setCell(0, 1);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -182,7 +155,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#3": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -193,17 +165,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"3");
-                                playerB.sendToClient(a+"3");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "3");
+                                playerB.sendToClient(a + "3");
                                 currentGame.setCell(0, 2);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -212,7 +183,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#4": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -223,17 +193,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"4");
-                                playerB.sendToClient(a+"4");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "4");
+                                playerB.sendToClient(a + "4");
                                 currentGame.setCell(1, 0);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -242,7 +211,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#5": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -253,17 +221,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"5");
-                                playerB.sendToClient(a+"5");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "5");
+                                playerB.sendToClient(a + "5");
                                 currentGame.setCell(1, 1);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -272,7 +239,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#6": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -283,17 +249,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"6");
-                                playerB.sendToClient(a+"6");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "6");
+                                playerB.sendToClient(a + "6");
                                 currentGame.setCell(1, 2);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -302,7 +267,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#7": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -313,17 +277,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"7");
-                                playerB.sendToClient(a+"7");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "7");
+                                playerB.sendToClient(a + "7");
                                 currentGame.setCell(2, 0);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -332,7 +295,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#8": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -343,17 +305,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"8");
-                                playerB.sendToClient(a+"8");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "8");
+                                playerB.sendToClient(a + "8");
                                 currentGame.setCell(2, 1);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -362,7 +323,6 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
                     case "#9": {
                         ConnectionToClient playerB = findOpponent(client);
@@ -373,17 +333,16 @@ public class GameServer extends AbstractServer {
                             } else {
                                 if (client != currentGame.playerX) {
                                     a = "#OO";
-                                } else a= "#XX";
-                                client.sendToClient(a+"9");
-                                playerB.sendToClient(a+"9");
+                                } else {
+                                    a = "#XX";
+                                }
+                                client.sendToClient(a + "9");
+                                playerB.sendToClient(a + "9");
                                 currentGame.setCell(2, 2);
-                                if (currentGame.checkPlayerYWin()) {
-                                    client.sendToClient("#serverWon");
-                                    playerB.sendToClient("#clientWon");
-                                } else if (currentGame.checkPlayerXWin()) {
+                                if (currentGame.checkPlayerOWin()||currentGame.checkPlayerXWin()) {
                                     client.sendToClient("#clientWon");
-                                    playerB.sendToClient("#serverWon");
-                                }else if (currentGame.checkDraw()) {
+                                    playerB.sendToClient("#clientLost");
+                                } else if (currentGame.checkDraw()) {
                                     client.sendToClient("#draw");
                                     playerB.sendToClient("#draw");
                                 }
@@ -392,11 +351,7 @@ public class GameServer extends AbstractServer {
                             Logger.getLogger(GameServer.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    //serverUI.receiveCommand("#serverTurn");
                     break;
-//                    case "#clientFirst":
-//                        serverUI.receiveCommand("#clientFirst");
-//                        break;
                     case "#createGame":
                         gameTable.put(gameName, client);
                         Game gameTemp = new Game();
@@ -449,12 +404,12 @@ public class GameServer extends AbstractServer {
 
     //Class methods ***************************************************
     @Override
-    protected void clientConnected(ConnectionToClient client) {//added for E49c
+    protected void clientConnected(ConnectionToClient client) {
         System.out.println("Client " + client + " connected!");
         client.setInfo("numMess", 0);
         Thread t = new Thread(new Runnable() {
+            @Override
             public void run() {
-                //serverUI.receiveCommand("enableAll");
                 serverUI.receiveCommand("#enableRestart");
                 serverUI.receiveCommand("#connected");
             }
@@ -463,13 +418,13 @@ public class GameServer extends AbstractServer {
     }
 
     @Override
-    synchronized protected void clientDisconnected(ConnectionToClient client) {//added for E49c
+    synchronized protected void clientDisconnected(ConnectionToClient client) {
         System.out.println(client.getInfo("ID") + " disconnected!");
         sendToAllClients(client.getInfo("ID") + " disconnected!");
     }
 
     @Override
-    synchronized protected void clientException(ConnectionToClient client, Throwable exception) {//added for E49c
+    synchronized protected void clientException(ConnectionToClient client, Throwable exception) {
         System.out.println(client.getInfo("ID") + " disconnected!");
         sendToAllClients(client.getInfo("ID") + " disconnected!");
         Thread t = new Thread(new Runnable() {
@@ -481,17 +436,17 @@ public class GameServer extends AbstractServer {
         t.start();
     }
 
-    void handleMessageFromServerUI(String message) {//added for E50b
+    void handleMessageFromServerUI(String message) {
         char temp = message.charAt(0);
         if (temp == '#') {
-            handleCommand(message);//added for E50
+            handleCommand(message);
         } else {
             sendToAllClients("SERVER MSG> " + message);
             serverUI.display("SERVER MSG> " + message);
         }
     }
 
-    private void handleCommand(String command) {//added for E50c
+    private void handleCommand(String command) {
         if (command.equals("#quit")) {
             try {
                 close();
@@ -588,11 +543,5 @@ public class GameServer extends AbstractServer {
             }
         }
         return gametemp;
-    }
-
-    private void swapPlayer(ConnectionToClient playerX, ConnectionToClient playerO) {
-        ConnectionToClient temp = playerX;
-        playerX = playerO;
-        playerO = temp;
     }
 }

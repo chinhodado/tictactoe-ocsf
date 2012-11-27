@@ -28,43 +28,32 @@ public class Game {
         currentMove = Move.X;
         grid = new Move[3][3];
     }
-    
-    public boolean checkTurn(ConnectionToClient player){
-        if (player==playerX&&currentMove == Move.X) return true;
-        else if (player==playerX&&currentMove == Move.O) return false;
-        else if (player==playerO&&currentMove == Move.X) return false;
-        else if (player==playerO&&currentMove == Move.O) return true;
+
+    public boolean checkTurn(ConnectionToClient player) {
+        if (player == playerX && currentMove == Move.X) {
+            return true;
+        } else if (player == playerX && currentMove == Move.O) {
+            return false;
+        } else if (player == playerO && currentMove == Move.X) {
+            return false;
+        } else if (player == playerO && currentMove == Move.O) {
+            return true;
+        }
         return true;
     }
 
-//	public Game (String name, Player playerX, Player playerO){
-//		this.name = name;
-//		this.playerX = playerX;
-//		this.playerO = playerO;
-//		currentMove = Move.X;
-//		status = Status.ONGOING;
-//		grid = new Move [3][3];
-//	}
     public boolean addPlayerX(ConnectionToClient player) {
         if (playerX == null) {
             playerX = player;
             return true;
-        } //		}else if (! playerX.isConnected()){
-        //			playerX.connect();
-        //			return true;
-        //		}
-        else {
-            return false;
         }
+        else return false;        
     }
 
     public boolean addPlayerO(ConnectionToClient player) {
         if (playerO == null) {
             playerO = player;
             return true;
-//		}else if (! playerO.isConnected()){
-//			playerO.connect();
-//			return true;
         }
         return false;
     }
@@ -89,8 +78,11 @@ public class Game {
         if (row < 3 && row >= 0 && col >= 0 && col < 3) {
             if (grid[row][col] == null) {
                 grid[row][col] = (currentMove == Move.X) ? Move.X : Move.O;
-                if (currentMove == Move.X) currentMove=Move.O;
-                else if (currentMove == Move.O) currentMove=Move.X;
+                if (currentMove == Move.X) {
+                    currentMove = Move.O;
+                } else if (currentMove == Move.O) {
+                    currentMove = Move.X;
+                }
                 updateStatus();
                 return true;
             }
@@ -99,7 +91,7 @@ public class Game {
     }
 
     public boolean setName(String name) {
-        if (this.name == "") {
+        if ("".equals(this.name)) {
             this.name = name;
             return true;
         }
@@ -121,11 +113,11 @@ public class Game {
         return (status == Status.PLAYER1_WIN) ? true : false;
     }
 
-    public boolean checkPlayerYWin() {
+    public boolean checkPlayerOWin() {
         return (status == Status.PLAYER2_WIN) ? true : false;
     }
-    
-     public boolean checkDraw() {
+
+    public boolean checkDraw() {
         return (status == Status.TIE) ? true : false;
     }
 
@@ -159,41 +151,10 @@ public class Game {
     }
 
     public Status checkTie() {
-//        if (grid[0][0] == grid[0][1] || grid[0][1] == grid[0][2] || grid[0][0] == grid[0][2]) { // Horizontal 1
-//            if (grid[0][0] == null || grid[0][1] == null || grid[0][2] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[1][0] == grid[1][1] || grid[1][1] == grid[1][2] || grid[1][0] == grid[1][2]) { // Horizontal 2
-//            if (grid[1][0] == null || grid[1][1] == null || grid[1][2] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[2][0] == grid[2][1] || grid[2][1] == grid[2][2] || grid[2][0] == grid[2][2]) { // Horizontal 3
-//            if (grid[2][0] == null || grid[2][1] == null || grid[2][2] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[0][0] == grid[1][0] || grid[1][0] == grid[2][0] || grid[2][0] == grid[0][0]) { // Vertical 1 			
-//            if (grid[0][0] == null || grid[1][0] == null || grid[2][0] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[0][1] == grid[1][1] || grid[1][1] == grid[2][1] || grid[2][1] == grid[0][1]) { // Vertical 2 			
-//            if (grid[0][1] == null || grid[1][1] == null || grid[2][1] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[0][2] == grid[1][2] || grid[1][2] == grid[2][2] || grid[2][2] == grid[0][2]) { // Vertical 3 			
-//            if (grid[0][2] == null || grid[1][2] == null || grid[2][2] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[0][0] == grid[1][1] || grid[1][1] == grid[2][2] || grid[0][0] == grid[2][2]) { // Diagonal 1
-//            if (grid[0][0] == null || grid[1][1] == null || grid[2][2] == null) {
-//                return Status.ONGOING;
-//            }
-//        } else if (grid[2][0] == grid[1][1] || grid[1][1] == grid[0][2] || grid[2][0] == grid[0][2]) { // Diagonal 2
-//            if (grid[2][0] == null || grid[1][1] == null || grid[0][2] == null) {
-//                return Status.ONGOING;
-//            }
-//        }
-        if (grid[0][0]!=null&&grid[0][1]!=null&&grid[0][2]!=null&&grid[1][0]!=null&&grid[1][1]!=null&&grid[1][2]!=null&&grid[2][0]!=null&&grid[2][1]!=null&&grid[2][2]!=null&&status!=Status.PLAYER1_WIN&&status!=Status.PLAYER1_WIN)
-        return Status.TIE;
-        else return Status.ONGOING;
+        if (grid[0][0] != null && grid[0][1] != null && grid[0][2] != null && grid[1][0] != null && grid[1][1] != null && grid[1][2] != null && grid[2][0] != null && grid[2][1] != null && grid[2][2] != null && status != Status.PLAYER1_WIN && status != Status.PLAYER1_WIN) {
+            return Status.TIE;
+        } else {
+            return Status.ONGOING;
+        }
     }
 }

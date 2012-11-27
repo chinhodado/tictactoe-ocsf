@@ -2,15 +2,12 @@
 import java.io.*;
 import common.*;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import ocsf.server.ConnectionToClient;
 
 public class GameServerGUI extends javax.swing.JFrame implements GameIF {
 
     GameServer server;
     static GameServerGUI gameServ;
-    static int count = 0;
-    public boolean clientFirst = false;
     DefaultListModel listModel = new DefaultListModel();
 
     //Creates new form GameServerGUI 
@@ -30,10 +27,8 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         serverStart = new javax.swing.JButton();
-        statusLabel = new javax.swing.JLabel();
         portTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        restartButton = new javax.swing.JButton();
         connectionLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
@@ -60,19 +55,9 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
             }
         });
 
-        statusLabel.setText("Game status:");
-
         portTextField.setText("5555");
 
         jLabel1.setText("Port to listen");
-
-        restartButton.setText("Restart game");
-        restartButton.setEnabled(false);
-        restartButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restartButtonActionPerformed(evt);
-            }
-        });
 
         connectionLabel.setText("Connection status: none");
 
@@ -112,12 +97,9 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(portTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(portTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(connectionLabel)))
@@ -125,13 +107,11 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(serverStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(restartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(serverStart)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,13 +123,9 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
                     .addComponent(portTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(statusLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(serverStart)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(restartButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(45, 45, 45)
                 .addComponent(connectionLabel)
                 .addContainerGap())
         );
@@ -164,6 +140,7 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
     private void serverStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverStartActionPerformed
         serverStart.setEnabled(false);
         Thread t = new Thread(new Runnable() {
+            @Override
             public void run() {
                 int port = 5555;  //The port number
                 try {
@@ -179,27 +156,6 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
         t.start();
         connectionLabel.setText("Connection status: listening");
     }//GEN-LAST:event_serverStartActionPerformed
-
-    private void restartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartButtonActionPerformed
-        server.sendToAllClients("#restart");
-        receiveCommand("enableAll");
-//        button1.setText("");
-//        button2.setText("");
-//        button3.setText("");
-//        button4.setText("");
-//        button5.setText("");
-//        button6.setText("");
-//        button7.setText("");
-//        button8.setText("");
-//        button9.setText("");
-        statusLabel.setText("Game restarted");
-        if (isServerTurn()) {
-            clientFirst = false;
-        } else {
-            clientFirst = true;
-        }
-        count = 0;
-    }//GEN-LAST:event_restartButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,9 +206,7 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField portTextField;
-    private javax.swing.JButton restartButton;
     private javax.swing.JButton serverStart;
-    private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -275,174 +229,9 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
         }
     }
 
-    /**
-     *
-     * @param command
-     */
     @Override
     public void receiveCommand(String command) {
         switch (command) {
-            case "enableAll": {
-                Runnable enable = new Runnable() {
-                    public void run() {
-//                        button1.setEnabled(true);
-//                        button2.setEnabled(true);
-//                        button3.setEnabled(true);
-//                        button4.setEnabled(true);
-//                        button5.setEnabled(true);
-//                        button6.setEnabled(true);
-//                        button7.setEnabled(true);
-//                        button8.setEnabled(true);
-//                        button9.setEnabled(true);
-                    }
-                };
-                java.awt.EventQueue.invokeLater(enable);
-                break;
-            }
-            case "disableAll": {
-                Runnable enable = new Runnable() {
-                    public void run() {
-//                        button1.setEnabled(false);
-//                        button2.setEnabled(false);
-//                        button3.setEnabled(false);
-//                        button4.setEnabled(false);
-//                        button5.setEnabled(false);
-//                        button6.setEnabled(false);
-//                        button7.setEnabled(false);
-//                        button8.setEnabled(false);
-//                        button9.setEnabled(false);
-                    }
-                };
-                java.awt.EventQueue.invokeLater(enable);
-                break;
-            }
-//            case "#1": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button1.setText("O");
-//                        button1.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#2": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button2.setText("O");
-//                        button2.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#3": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button3.setText("O");
-//                        button3.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#4": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button4.setText("O");
-//                        button4.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#5": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button5.setText("O");
-//                        button5.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#6": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button6.setText("O");
-//                        button6.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#7": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button7.setText("O");
-//                        button7.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#8": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button8.setText("O");
-//                        button8.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-//            case "#9": {
-//                Runnable disable = new Runnable() {
-//                    public void run() {
-//                        button9.setText("O");
-//                        button9.setEnabled(false);
-//                        count++;
-//                        checkWinner();
-//                    }
-//                };
-//                java.awt.EventQueue.invokeLater(disable);
-//                break;
-//            }
-            case "#clientFirst":
-                clientFirst = true;
-                break;
-            case "#serverTurn":
-                Runnable temp = new Runnable() {
-                    public void run() {
-                        statusLabel.setText("Your turn!");
-                    }
-                };
-                java.awt.EventQueue.invokeLater(temp);
-                break;
-            case "#enableRestart":
-                Runnable temp2 = new Runnable() {
-                    public void run() {
-                        restartButton.setEnabled(true);
-                    }
-                };
-                java.awt.EventQueue.invokeLater(temp2);
-                break;
             case "#connected": {
                 Runnable disable = new Runnable() {
                     public void run() {
@@ -455,70 +244,7 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
         }
     }
 
-    public void checkWinner() {
-//        String win;
-//
-//        //horizontal
-//        if (button1.getText().equals(button2.getText()) && button2.getText().equals(button3.getText()) && !"".equals(button1.getText())) {
-//            win = button1.getText();
-//        } else if (button4.getText().equals(button5.getText()) && button5.getText().equals(button6.getText()) && !"".equals(button4.getText())) {
-//            win = button4.getText();
-//        } else if (button7.getText().equals(button8.getText()) && button8.getText().equals(button9.getText()) && !"".equals(button7.getText())) {
-//            win = button7.getText();
-//        } //vertical
-//        else if (button1.getText().equals(button4.getText()) && button4.getText().equals(button7.getText()) && !"".equals(button1.getText())) {
-//            win = button1.getText();
-//        } else if (button2.getText().equals(button5.getText()) && button5.getText().equals(button8.getText()) && !"".equals(button2.getText())) {
-//            win = button2.getText();
-//        } else if (button3.getText().equals(button6.getText()) && button6.getText().equals(button9.getText()) && !"".equals(button3.getText())) {
-//            win = button3.getText();
-//        } //diagonal
-//        else if (button1.getText().equals(button5.getText()) && button5.getText().equals(button9.getText()) && !"".equals(button1.getText())) {
-//            win = button1.getText();
-//        } else if (button3.getText().equals(button5.getText()) && button5.getText().equals(button7.getText()) && !"".equals(button3.getText())) {
-//            win = button3.getText();
-//        } else {
-//            win = "";
-//        }
-//        if (win.equals("X")) {
-//            receiveCommand("disableAll");
-//            server.sendToAllClients("#serverWon");
-//            Runnable temp = new Runnable() {
-//                public void run() {
-//                    statusLabel.setText("You won!");
-//                }
-//            };
-//            java.awt.EventQueue.invokeLater(temp);
-//            //JOptionPane.showMessageDialog(null, "Server won!");   
-//        } else if (win.equals("O")) {
-//            receiveCommand("disableAll");
-//            server.sendToAllClients("#clientWon");
-//            Runnable temp = new Runnable() {
-//                public void run() {
-//                    statusLabel.setText("You lost...");
-//                }
-//            };
-//            java.awt.EventQueue.invokeLater(temp);
-//            //JOptionPane.showMessageDialog(null, "Client won!");
-//        } else if (count == 9 && win.equals("")) {
-//            server.sendToAllClients("#draw");
-//            Runnable temp = new Runnable() {
-//                public void run() {
-//                    statusLabel.setText("Draw game!");
-//                }
-//            };
-//            java.awt.EventQueue.invokeLater(temp);
-//        }
-    }
-
-    private boolean isServerTurn() {
-        boolean isServerTurn = true;
-        if ((clientFirst && (count % 2 == 0)) || ((!clientFirst) && (count % 2 == 1))) {
-            isServerTurn = false;
-        }
-        return isServerTurn;
-    }
-
+    @Override
     public void addGame(int gameName, ConnectionToClient client) {
         final String name = gameName + " ";
         final String clientName = client.toString() + " " + client.getName();
@@ -529,10 +255,5 @@ public class GameServerGUI extends javax.swing.JFrame implements GameIF {
             }
         };
         java.awt.EventQueue.invokeLater(temp);
-    }
-
-    @Override
-    public void receiveList(DefaultListModel listModel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
