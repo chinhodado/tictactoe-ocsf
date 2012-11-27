@@ -67,40 +67,77 @@ public class GameClient extends AbstractClient {
             clientUI.receiveCommand(msg.toString());
         } else {
             switch (msg.toString()) {
-                case "#1":
-                    clientUI.receiveCommand("#1");
+                case "#XX1":
+                    clientUI.receiveCommand("#XX1");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#2":
-                    clientUI.receiveCommand("#2");
+                case "#XX2":
+                    clientUI.receiveCommand("#XX2");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#3":
-                    clientUI.receiveCommand("#3");
+                case "#XX3":
+                    clientUI.receiveCommand("#XX3");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#4":
-                    clientUI.receiveCommand("#4");
+                case "#XX4":
+                    clientUI.receiveCommand("#XX4");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#5":
-                    clientUI.receiveCommand("#5");
+                case "#XX5":
+                    clientUI.receiveCommand("#XX5");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#6":
-                    clientUI.receiveCommand("#6");
+                case "#XX6":
+                    clientUI.receiveCommand("#XX6");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#7":
-                    clientUI.receiveCommand("#7");
+                case "#XX7":
+                    clientUI.receiveCommand("#XX7");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#8":
-                    clientUI.receiveCommand("#8");
+                case "#XX8":
+                    clientUI.receiveCommand("#XX8");
                     clientUI.receiveCommand("#clientTurn");
                     break;
-                case "#9":
-                    clientUI.receiveCommand("#9");
+                case "#XX9":
+                    clientUI.receiveCommand("#XX9");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO1":
+                    clientUI.receiveCommand("#OO1");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                
+                case "#OO2":
+                    clientUI.receiveCommand("#OO2");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO3":
+                    clientUI.receiveCommand("#OO3");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO4":
+                    clientUI.receiveCommand("#OO4");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO5":
+                    clientUI.receiveCommand("#OO5");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO6":
+                    clientUI.receiveCommand("#OO6");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO7":
+                    clientUI.receiveCommand("#OO7");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO8":
+                    clientUI.receiveCommand("#OO8");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO9":
+                    clientUI.receiveCommand("#OO9");
                     clientUI.receiveCommand("#clientTurn");
                     break;
                 case "#serverWon":
@@ -119,6 +156,8 @@ public class GameClient extends AbstractClient {
                     clientUI.receiveCommand("#restart");
                 case "#gameStart":
                     clientUI.receiveCommand("enableAll");
+                case "#clientFirst":
+                    clientUI.receiveCommand("#clientFirst");
                 default:
                     break;
             }
