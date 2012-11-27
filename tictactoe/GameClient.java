@@ -5,11 +5,13 @@
 import ocsf.client.*;
 import common.*;
 import java.io.*;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class overrides some of the methods defined in the abstract superclass in order to give more functionality to the client.
+ * This class overrides some of the methods defined in the abstract superclass
+ * in order to give more functionality to the client.
  *
  * @author Dr Timothy C. Lethbridge
  * @author Dr Robert Lagani&egrave;
@@ -20,7 +22,8 @@ public class GameClient extends AbstractClient {
     //Instance variables **********************************************
 
     /**
-     * The interface type variable. It allows the implementation of the display method in the client.
+     * The interface type variable. It allows the implementation of the display
+     * method in the client.
      */
     GameIF clientUI;
     String id;
@@ -60,59 +63,104 @@ public class GameClient extends AbstractClient {
      */
     @Override
     public void handleMessageFromServer(Object msg) {
-        switch (msg.toString()) {
-            case "#1":
-                clientUI.receiveCommand("#1");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#2":
-                clientUI.receiveCommand("#2");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#3":
-                clientUI.receiveCommand("#3");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#4":
-                clientUI.receiveCommand("#4");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#5":
-                clientUI.receiveCommand("#5");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#6":
-                clientUI.receiveCommand("#6");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#7":
-                clientUI.receiveCommand("#7");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#8":
-                clientUI.receiveCommand("#8");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#9":
-                clientUI.receiveCommand("#9");
-                clientUI.receiveCommand("#clientTurn");
-                break;
-            case "#serverWon":
-                clientUI.receiveCommand("disableAll");
-                clientUI.receiveCommand("#serverWon");
-                break;
-            case "#clientWon":
-                clientUI.receiveCommand("disableAll");
-                clientUI.receiveCommand("#clientWon");
-                break;
-            case "#draw":
-                clientUI.receiveCommand("disableAll");
-                clientUI.receiveCommand("#draw");
-                break;
-            case "#restart":
-                clientUI.receiveCommand("#restart");
-            default:
-                break;
+        if (msg.toString().contains("#list")) {
+            clientUI.receiveCommand(msg.toString());
+        } else {
+            switch (msg.toString()) {
+                case "#XX1":
+                    clientUI.receiveCommand("#XX1");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX2":
+                    clientUI.receiveCommand("#XX2");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX3":
+                    clientUI.receiveCommand("#XX3");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX4":
+                    clientUI.receiveCommand("#XX4");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX5":
+                    clientUI.receiveCommand("#XX5");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX6":
+                    clientUI.receiveCommand("#XX6");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX7":
+                    clientUI.receiveCommand("#XX7");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX8":
+                    clientUI.receiveCommand("#XX8");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#XX9":
+                    clientUI.receiveCommand("#XX9");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO1":
+                    clientUI.receiveCommand("#OO1");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                
+                case "#OO2":
+                    clientUI.receiveCommand("#OO2");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO3":
+                    clientUI.receiveCommand("#OO3");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO4":
+                    clientUI.receiveCommand("#OO4");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO5":
+                    clientUI.receiveCommand("#OO5");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO6":
+                    clientUI.receiveCommand("#OO6");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO7":
+                    clientUI.receiveCommand("#OO7");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO8":
+                    clientUI.receiveCommand("#OO8");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#OO9":
+                    clientUI.receiveCommand("#OO9");
+                    clientUI.receiveCommand("#clientTurn");
+                    break;
+                case "#serverWon":
+                    clientUI.receiveCommand("disableAll");
+                    clientUI.receiveCommand("#serverWon");
+                    break;
+                case "#clientWon":
+                    clientUI.receiveCommand("disableAll");
+                    clientUI.receiveCommand("#clientWon");
+                    break;
+                case "#draw":
+                    clientUI.receiveCommand("disableAll");
+                    clientUI.receiveCommand("#draw");
+                    break;
+                case "#restart":
+                    clientUI.receiveCommand("#restart");
+                case "#gameStart":
+                    clientUI.receiveCommand("enableAll");
+                case "#clientFirst":
+                    clientUI.receiveCommand("#clientFirst");
+                default:
+                    break;
+            }
         }
         clientUI.display(msg.toString());
     }
@@ -146,7 +194,7 @@ public class GameClient extends AbstractClient {
         } else if (command.equals("#logoff")) {
             try {
                 closeConnection();
-            } catch (IOException e) {                
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (command.contains("#sethost")) {
@@ -199,6 +247,10 @@ public class GameClient extends AbstractClient {
             sendToServer("#8");
         } else if (command.equals("#9")) {
             sendToServer("#9");
+        } else if (command.equals("#createGame")) {
+            sendToServer("#createGame");
+        } else if (command.equals("#getGameList")) {
+            sendToServer("#getGameList");
         } else {
             System.out.println("Command not recognized!");
         }
@@ -216,12 +268,12 @@ public class GameClient extends AbstractClient {
     }
 
     @Override
-    protected void connectionClosed() { 
+    protected void connectionClosed() {
         System.out.println("Connection closed");
     }
 
     @Override
-    protected void connectionException(Exception exception) { 
+    protected void connectionException(Exception exception) {
         connectionClosed();
         System.out.println("Server has shutted down.");
         System.out.println("Terminating client...");
@@ -230,9 +282,9 @@ public class GameClient extends AbstractClient {
 
     @Override
     protected void connectionEstablished() {
-    Thread t = new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
             public void run() {
-                clientUI.receiveCommand("enableAll");
+                //clientUI.receiveCommand("enableAll");
                 clientUI.receiveCommand("#connected");
             }
         }, "EnableButton");
